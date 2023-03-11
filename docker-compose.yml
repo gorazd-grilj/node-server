@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  node-server:
+    image: node:latest
+    container_name: node-server
+    build: .
+    command: "node src/index.js"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongo-server
+    ports:
+      - 27017:27017
+    volumes:
+      - /database:/data/todo
+
